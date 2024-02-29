@@ -25,8 +25,11 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
-    if vim.fn.filereadable('.vscode/launch.json') then
-	require('dap.ext.vscode').load_launchjs()
+    -- set dap log level
+    dap.set_log_level 'DEBUG'
+
+    if vim.fn.filereadable '.vscode/launch.json' then
+      require('dap.ext.vscode').load_launchjs()
     end
 
     require('mason-nvim-dap').setup {
@@ -43,14 +46,15 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         -- 'delve',
-	'php',
-	'python',
-	'c',
-	'cpp',
-	'rust',
-	'node',
-	'firefox',
-	'typescript',
+        'php',
+        'python',
+        'c',
+        'cpp',
+        'rust',
+        'node',
+        'chrome',
+        'firefox',
+        'typescript',
       },
     }
 

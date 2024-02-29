@@ -151,6 +151,11 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+--  quick remap
+-- vim.keymap.set('i', '<A-bbbbbbbbbs>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
+-- vim.keymap.set('i', '<C-BS>', '<C-w>', { remap = true, desc = 'Delete word in backwards direction from current position' })
+vim.keymap.set('i', '<M-w>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -556,8 +561,14 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         intelephense = {},
+        sqlls = {},
         cssls = {},
         tailwindcss = {},
+        bashls = {},
+        jsonls = {},
+        yamlls = {},
+        dockerls = {},
+        docker_compose_language_service = {},
 
         --
 
@@ -744,7 +755,7 @@ require('lazy').setup({
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('tokyonight').setup {
-        style = 'moon',
+        style = 'storm',
         transparent = true,
       }
 
@@ -795,7 +806,7 @@ require('lazy').setup({
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'php', 'typescript', 'python' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
@@ -828,7 +839,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information see: :help lazy.nvim-lazy.nvim-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
