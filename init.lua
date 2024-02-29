@@ -151,6 +151,11 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+--  quick remap
+-- vim.keymap.set('i', '<A-bbbbbbbbbs>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
+-- vim.keymap.set('i', '<C-BS>', '<C-w>', { remap = true, desc = 'Delete word in backwards direction from current position' })
+vim.keymap.set('i', '<M-w>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
