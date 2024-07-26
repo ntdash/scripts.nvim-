@@ -7,6 +7,6 @@ return {
     'MunifTanjim/nui.nvim',
   },
   config = function()
-    vim.keymap.set('n', '<c-q>', ':Neotree filesystem reveal toggle float<CR>', { desc = 'Neotree: reveal current workspace explorer' })
+    vim.keymap.set('n', '<c-q>', ':Neotree filesystem reveal toggle float<CR>', { desc = 'Neotree: reveal current workspace explorer', silent = true })
   end,
 }

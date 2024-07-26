@@ -101,6 +101,11 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+-- set default tabstop
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -110,6 +115,19 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+vim.g.clipboard = {
+  name = 'wsl-clipboard',
+  copy = {
+    ['+'] = 'clip.exe',
+    ['*'] = 'clip.exe',
+  },
+  paste = {
+    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
+
 vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
@@ -529,6 +547,11 @@ require('lazy').setup({
               callback = vim.lsp.buf.clear_references,
             })
           end
+
+          -- enable inlay if possible
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true)
+          end
         end,
       })
 
@@ -561,7 +584,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         intelephense = {},
-        sqlls = {},
+        -- sqlls = {},
         cssls = {},
         tailwindcss = {},
         bashls = {},
@@ -610,6 +633,10 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
+        'clangd',
+        'clang-format',
+        'pint',
+        'intelephense',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -642,9 +669,10 @@ require('lazy').setup({
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        c = { 'clang-format' },
+        php = { 'pint' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
-        --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },

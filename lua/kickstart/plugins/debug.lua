@@ -14,6 +14,9 @@ return {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
+    -- is required required
+    'nvim-neotest/nvim-nio',
+
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
@@ -46,15 +49,12 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         -- 'delve',
-        'php',
-        'python',
-        'c',
-        'cpp',
-        'rust',
-        'node',
-        'chrome',
-        'firefox',
-        'typescript',
+        -- 'python',
+        -- 'c',
+        -- 'cpp',
+        -- 'rust',
+        -- 'node',
+        -- 'typescript',
       },
     }
 
