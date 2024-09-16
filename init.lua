@@ -169,14 +169,12 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
---  quick remap
--- vim.keymap.set('i', '<A-bbbbbbbbbs>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
--- vim.keymap.set('i', '<C-BS>', '<C-w>', { remap = true, desc = 'Delete word in backwards direction from current position' })
-vim.keymap.set('i', '<M-w>', '<C-w>', { desc = 'Delete word in backwards direction from current position' })
-
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- quick remapping
+vim.keymap.set('i', '<M-w>', '<C-w>', {})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -206,6 +204,10 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- move between buffer
+vim.keymap.set('n', '<A-[>', '<cmd>bp<CR>', { desc = 'Go to previous buffer' })
+vim.keymap.set('n', '<A-]>', '<cmd>bn<CR>', { desc = 'Go to next buffer' })
 
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
